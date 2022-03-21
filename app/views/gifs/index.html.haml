@@ -5,6 +5,7 @@
 - @gifs.each do |gif|
   = gif.name
   = image_tag gif.file
+  = gif.tag_list
   - if user_signed_in? && current_user.id == gif.user_id
     = link_to 'Edit', edit_gif_path(gif)
     = link_to 'Delete', gif, method: :delete, data: { confirm: 'Are you sure?' }

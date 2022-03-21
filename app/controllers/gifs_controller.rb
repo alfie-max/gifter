@@ -37,7 +37,7 @@ class GifsController < ApplicationController
   private
 
   def gif_params
-    params.require(:gif).permit(:name, :file, :description)
+    params.require(:gif).permit(:name, :file, :description, tag_list: [])
   end
 
   def set_gif
