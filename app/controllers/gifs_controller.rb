@@ -3,7 +3,19 @@ class GifsController < ApplicationController
   before_action :set_gif, only: %i[show edit update destroy]
 
   def index
-    @pagy, @gifs = pagy(Gif.recent, items: 5)
+    @gifs = Gif.recent
+    if params[:tag]
+      if ActsAsTaggableOn::Tag.where(name: params[:tag]).exists?
+        @gifs = @gifs.tagged_with(params[:tag])
+      else
+        @gifs = @gifs.where(
+          'name ILIKE ? OR description ILIKE ?',
+          "%#{params[:tag]}%", "%#{params[:tag]}%"
+        )
+      end
+    end
+
+    @pagy, @gifs = pagy(@gifs, items: 5)
   end
 
   def my

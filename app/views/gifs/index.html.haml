@@ -1,12 +1,24 @@
 %h1 Gifter
 
+= form_with url: gifs_path, method: :get do |f|
+  = f.label :tag
+  = f.select :tag, options_for_select(ActsAsTaggableOn::Tag.all.map { |tag| [tag.name, tag.name] }, params[:tag]), { include_blank: true }
+  = f.submit 'Search'
+
 - @gifs.each do |gif|
   = gif.name
   = image_tag gif.file
-  = gif.tag_list
+  - gif.tag_list.each do |tag|
+    = link_to tag, gifs_path(tag: tag)
   - if user_signed_in? && current_user.id == gif.user_id
     = link_to 'Edit', edit_gif_path(gif)
     = link_to 'Delete', gif, method: :delete, data: { confirm: 'Are you sure?' }
 
 
 = pagy_nav(@pagy).html_safe
+
+:javascript
+  $( "#tag" ).select2({
+    tags: true,
+    multiple: false
+  })
