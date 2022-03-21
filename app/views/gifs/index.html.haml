@@ -1,4 +1,12 @@
-
-h1 Gifter
+%h1 Gifter
 
 = link_to 'New gif', new_gif_path
+
+- @gifs.each do |gif|
+  = gif.name
+  = image_tag gif.file
+  = link_to 'Edit', edit_gif_path(gif)
+  = link_to 'Delete', gif, method: :delete, data: { confirm: 'Are you sure?' }
+
+
+= pagy_nav(@pagy).html_safe
