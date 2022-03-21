@@ -11,8 +11,9 @@ class GifsController < ApplicationController
   end
 
   def create
-    @gif = Gif.new(gif_params)
-    if @gif.save
+    @gif = current_user.gifs.create(gif_params)
+
+    if @gif.persisted?
       redirect_to root_path
     else
       render :new
