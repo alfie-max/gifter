@@ -31,6 +31,7 @@ gem 'bootsnap', '>= 1.4.4', require: false
 gem 'haml-rails'
 
 gem 'devise'
+gem 'active_storage_validations'
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
