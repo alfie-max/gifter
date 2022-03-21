@@ -1,0 +1,21 @@
+= form_with model: @gif do |f|
+  - if @gif.errors.any?
+    %div{:style => "color: red"}
+      %h2
+        = pluralize(@gif.errors.count, "error")
+        prohibited this gif from being saved:
+      %ul
+        - @gif.errors.each do |error|
+          %li= error.full_message
+  %div
+    = f.label :file
+    = f.file_field :file
+  %div
+    = f.label :name
+    = f.text_field :name
+
+  %div
+    = f.label :description
+    = f.text_field :description
+  %div
+    = f.submit
