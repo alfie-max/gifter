@@ -6,6 +6,12 @@ class GifsController < ApplicationController
     @pagy, @gifs = pagy(Gif.recent, items: 5)
   end
 
+  def my
+    @pagy, @gifs = pagy(current_user.gifs.recent, items: 20)
+
+    render :index
+  end
+
   def new
     @gif = Gif.new
   end

@@ -3,5 +3,9 @@ Rails.application.routes.draw do
 
   root 'gifs#index'
 
-  resources :gifs
+  resources :gifs do
+    collection do
+      get :my
+    end
+  end
 end

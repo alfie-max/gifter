@@ -1,7 +1,5 @@
 %h1 Gifter
 
-= link_to 'New gif', new_gif_path
-
 - @gifs.each do |gif|
   = gif.name
   = image_tag gif.file
